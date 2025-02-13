@@ -1,0 +1,131 @@
+name: Matrix Build with Progressive Cleanup
+
+on:
+  workflow_dispatch:
+
+jobs:
+  job1:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        version: [1, 2, 3]
+    steps:
+      - uses: actions/checkout@v3
+      
+      # Your job1 steps here
+      - name: Run job1 tasks
+        run: echo "Running job1 with version ${{ matrix.version }}"
+
+  job2:
+    needs: job1
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        version: [1, 2, 3]
+    steps:
+      - uses: actions/checkout@v3
+      
+      # Cleanup job1 artifacts and workspace
+      - name: Cleanup job1
+        run: |
+          # Menampilkan penggunaan disk sebelum cleanup
+          echo "Disk usage before cleanup:"
+          df -h
+          
+          # Menghapus workspace dan artifacts dari job1
+          sudo rm -rf ${GITHUB_WORKSPACE}/*
+          sudo rm -rf /home/runner/work/_temp/_github_workflow/job1
+          sudo rm -rf /home/runner/work/_temp/_github_home/job1
+          
+          # Membersihkan cache dan tools yang tidak diperlukan
+          sudo rm -rf /usr/share/dotnet
+          sudo rm -rf /usr/local/lib/android
+          sudo rm -rf /opt/ghc
+          sudo rm -rf "/usr/local/share/boost"
+          sudo rm -rf "$AGENT_TOOLSDIRECTORY"
+          
+          # Menampilkan penggunaan disk setelah cleanup
+          echo "Disk usage after cleanup:"
+          df -h
+      
+      # Your job2 steps here
+      - name: Run job2 tasks
+        run: echo "Running job2 with version ${{ matrix.version }}"
+
+  job3:
+    needs: job2
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        version: [1, 2, 3]
+    steps:
+      - uses: actions/checkout@v3
+      
+      # Cleanup job2 artifacts and workspace
+      - name: Cleanup job2
+        run: |
+          echo "Disk usage before cleanup:"
+          df -h
+          
+          sudo rm -rf ${GITHUB_WORKSPACE}/*
+          sudo rm -rf /home/runner/work/_temp/_github_workflow/job2
+          sudo rm -rf /home/runner/work/_temp/_github_home/job2
+          
+          sudo rm -rf /usr/share/dotnet
+          sudo rm -rf /usr/local/lib/android
+          sudo rm -rf /opt/ghc
+          sudo rm -rf "/usr/local/share/boost"
+          sudo rm -rf "$AGENT_TOOLSDIRECTORY"
+          
+          echo "Disk usage after cleanup:"
+          df -h
+      
+      # Your job3 steps here
+      - name: Run job3 tasks
+        run: echo "Running job3 with version ${{ matrix.version }}"
+
+  job4:
+    needs: job3
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        version: [1, 2, 3]
+    steps:
+      - uses: actions/checkout@v3
+      
+      # Cleanup job3 artifacts and workspace
+      - name: Cleanup job3
+        run: |
+          echo "Disk usage before cleanup:"
+          df -h
+          
+          sudo rm -rf ${GITHUB_WORKSPACE}/*
+          sudo rm -rf /home/runner/work/_temp/_github_workflow/job3
+          sudo rm -rf /home/runner/work/_temp/_github_home/job3
+          
+          sudo rm -rf /usr/share/dotnet
+          sudo rm -rf /usr/local/lib/android
+          sudo rm -rf /opt/ghc
+          sudo rm -rf "/usr/local/share/boost"
+          sudo rm -rf "$AGENT_TOOLSDIRECTORY"
+          
+          echo "Disk usage after cleanup:"
+          df -h
+      
+      # Your job4 steps here
+      - name: Run job4 tasks
+        run: echo "Running job4 with version ${{ matrix.version }}"
+      
+      # Final cleanup
+      - name: Final Cleanup
+        if: always()
+        run: |
+          echo "Final cleanup - disk usage before:"
+          df -h
+          
+          sudo rm -rf ${GITHUB_WORKSPACE}/*
+          sudo rm -rf /home/runner/work/_temp/_github_workflow/*
+          sudo rm -rf /home/runner/work/_temp/_github_home/*
+          
+          echo "Final cleanup - disk usage after:"
+          df -h
