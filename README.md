@@ -33,9 +33,14 @@ const rizki = {
 ## 🚀 Featured Projects
 
 <div align="center">
+  <h2>OpenWrt</h2>
   <a href="https://github.com/rizkikotet-dev/RTA-WRT">
     <img src="https://github-readme-stats.vercel.app/api/pin/?username=rizkikotet-dev&repo=RTA-WRT&theme=dracula" width="49%" />
   </a>
+  <a href="https://github.com/rizkikotet-dev/luci-theme-rtawrt">
+    <img src="https://github-readme-stats.vercel.app/api/pin/?username=rizkikotet-dev&repo=luci-theme-rtawrt&theme=dracula" width="49%" />
+  </a>
+  <h2>Docker</h2>
   <a href="https://github.com/rizkikotet-dev/Mikhmon-Docker">
     <img src="https://github-readme-stats.vercel.app/api/pin/?username=rizkikotet-dev&repo=Mikhmon-Docker&theme=dracula" width="49%" />
   </a>
