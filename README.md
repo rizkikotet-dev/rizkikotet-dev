@@ -36,9 +36,9 @@ const rizki = {
   <a href="https://github.com/rizkikotet-dev/RTA-WRT">
     <img src="https://github-readme-stats.vercel.app/api/pin/?username=rizkikotet-dev&repo=RTA-WRT&theme=dracula" width="49%" />
   </a>
-<!--   <a href="https://github.com/rizkikotet-dev/Mikhmon-Docker">
+  <a href="https://github.com/rizkikotet-dev/Mikhmon-Docker">
     <img src="https://github-readme-stats.vercel.app/api/pin/?username=rizkikotet-dev&repo=Mikhmon-Docker&theme=dracula" width="49%" />
-  </a> -->
+  </a>
 </div>
 
 
